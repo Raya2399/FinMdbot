@@ -1,6 +1,6 @@
-let {
-	MessageType
-} = require('@adiwajshing/baileys');
+const { loadBaileys } = require('../baileys-loader.mjs');
+
+let baileys;
 
 let wm = global.wm;
 let handler = async (m, {
@@ -8,6 +8,12 @@ let handler = async (m, {
 	usedPrefix,
 	owner
 }) => {
+  if (!baileys) {
+    baileys = await loadBaileys();
+  }
+
+  const { MessageType } = baileys;
+  
 		let lastFishingTime = global.db.data.users[m.sender].lastmancing || 0;
 		let timeDiff = Date.now() - lastFishingTime;
 		let remainingTime = 180000 - timeDiff; 
@@ -22,7 +28,7 @@ let handler = async (m, {
 				let paus = Math.floor(Math.random() * 2);
 				let kepiting = Math.floor(Math.random() * 27);
 
-				let imageUrl = 'https://api.betabotz.eu.org/api/tools/get-upload?id=f/arit56zv.jpg';
+				let imageUrl = 'https://api.botcahx.eu.org/api/tools/get-upload?id=f/arit56zv.jpg';
 				let totalCatch = nila + bawal + ikan + lele + udang + paus + kepiting;
 
 				let mcng = `•  *Hasil Mancing:*
