@@ -365,7 +365,7 @@ module.exports = {
                       if (!isNumber(user.lastrampok)) user.lastrampok = 0
                       if (!('registered' in user)) user.registered = false
                       if (!user.registered) {
-                      if (!('name' in user)) user.name = this.getName(m.sender)
+                      if (!('name' in user)) user.name = await this.getName(m.sender)
           
                       if (!isNumber(user.apel)) user.apel = 0
                       if (!isNumber(user.anggur)) user.anggur = 0
@@ -750,7 +750,7 @@ module.exports = {
                       semangka: 0,
                       jeruk: 0,
                       semangka: 0,
-                      name: this.getName(m.sender),
+                      name: await this.getName(m.sender),
                       age: -1,
                       regTime: -1,
                       premiumDate: -1, 
@@ -767,7 +767,7 @@ module.exports = {
                       lbars: '[▒▒▒▒▒▒▒▒▒]', 
                       role: 'Newbie ㋡', 
                       registered: false,
-                      name: this.getName(m.sender),
+                      name: await this.getName(m.sender),
                       age: -1,
                       regTime: -1,
                       autolevelup: true,
@@ -1206,7 +1206,7 @@ module.exports = {
         }
     },
 	
-  async participantsUpdate({ id, participants, action }) {
+   async participantsUpdate({ id, participants, action }) {
     if (opts['self']) return
     if (global.isInit) return
 
@@ -1230,15 +1230,12 @@ module.exports = {
                     }
                     if (!jid || (!jid.includes('@s.whatsapp.net') && !jid.includes('@lid'))) continue
 
-                    let pp = 'https://telegra.ph/file/70e8de9b1879568954f09.jpg'
-                    try { pp = await this.profilePictureUrl(jid, 'image') } catch {}
-
                     const isAdd = ['add', 'invite', 'invite_v4'].includes(action)
 
                     text = (isAdd
-                        ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!')
-                        : (chat.sBye || this.bye || conn.bye || 'Bye, @user!'))
-                        .replace('@subject', groupMetadata.subject || 'this group')
+                        ? (chat.sWelcome || this.welcome || 'Selamat datang @user 👋')
+                        : (chat.sBye || this.bye || 'Selamat tinggal @user 👋'))
+                        .replace('@subject', groupMetadata.subject || 'Group')
                         .replace('@desc', groupMetadata.desc?.toString() || '')
                         .replace('@user', '@' + jid.split('@')[0])
 
@@ -1246,25 +1243,9 @@ module.exports = {
                         text,
                         mentions: [jid]
                     })
-					/*
-                    await this.sendMessage(id, {
-                        text: text,
-                        mentions: [jid],
-                        contextInfo: {
-                            externalAdReply: {
-                                title: isAdd ? 'Selamat Datang' : 'Selamat Tinggal',
-                                body: global.wm || 'Bot WhatsApp',
-                                thumbnailUrl: pp,
-                                sourceUrl: 'https://api.botcahx.eu.org',
-                                mediaType: 1,
-                                renderLargerThumbnail: true
-                            }
-                        }
-                    })
- */
                 }
             }
-            break            
+            break           
             /**case 'promote':
             text = (chat.sPromote || this.spromote || conn.spromote || '@user ```is now Admin```')
             case 'demote':
@@ -1304,7 +1285,7 @@ global.dfail = (type, m, conn) => {
         private: 'Perintah ini hanya dapat digunakan di Chat Pribadi!',
         admin: 'Perintah ini hanya untuk *Admin* grup!',
         botAdmin: 'Jadikan bot sebagai *Admin* untuk menggunakan perintah ini!',
-        unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Alfinphoenix.16*',
+        unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Alfin.16*',
         restrict: 'Fitur ini di *disable*!'
     }[type]
     if (msg) return m.reply(msg)
