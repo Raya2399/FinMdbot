@@ -1,15 +1,3 @@
-const { 
-    BufferJSON, 
-    WA_DEFAULT_EPHEMERAL, 
-    generateWAMessageFromContent, 
-    proto, 
-    generateWAMessageContent, 
-    generateWAMessage, 
-    prepareWAMessageMedia, 
-    areJidsSameUser, 
-    getContentType 
-} = require('@adiwajshing/baileys')
-
 process.env.TZ = 'Asia/Jakarta'
 let fs = require('fs')
 let path = require('path')
@@ -161,24 +149,7 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command }) => {
 
             let text = menuList.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), 
                 (_, name) => '' + replace[name])
-
-            await conn.relayMessage(m.chat, {
-            extendedTextMessage:{
-                text: text, 
-                contextInfo: {
-                    mentionedJid: [m.sender],
-                    externalAdReply: {
-                        title: date,
-                        mediaType: 1,
-                        previewType: 0,
-                        renderLargerThumbnail: true,
-                        thumbnailUrl: 'https://image2url.com/images/1755274480773-da0ca085-81eb-40b9-98c2-d8abff9150c3.jpg',
-                        sourceUrl: 'https://whatsapp.com/channel/0029VaxV1qnDOQIdnqVmBi3M'
-                    }
-                }, 
-                mentions: [m.sender]
-            }
-        }, {})
+            await conn.sendMessage(m.chat, { image: { url: 'https://image2url.com/images/1755274480773-da0ca085-81eb-40b9-98c2-d8abff9150c3.jpg' }, caption: text, mentions: [m.sender] }, { quoted: m });
             return
         }
 
@@ -235,23 +206,7 @@ let handler = async (m, { conn, usedPrefix: _p, args = [], command }) => {
         let text = menuCategory.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), 
             (_, name) => '' + replace[name])
 
-        await conn.relayMessage(m.chat, {
-            extendedTextMessage:{
-                text: text, 
-                contextInfo: {
-                    mentionedJid: [m.sender],
-                    externalAdReply: {
-                        title: date,
-                        mediaType: 1,
-                        previewType: 0,
-                        renderLargerThumbnail: true,
-                        thumbnailUrl: 'https://image2url.com/images/1755274480773-da0ca085-81eb-40b9-98c2-d8abff9150c3.jpg',
-                        sourceUrl: 'https://whatsapp.com/channel/0029VaxV1qnDOQIdnqVmBi3M'
-                    }
-                }, 
-                mentions: [m.sender]
-            }
-        }, {})
+        await conn.sendMessage(m.chat, { image: { url: 'https://image2url.com/images/1755274480773-da0ca085-81eb-40b9-98c2-d8abff9150c3.jpg' }, caption: text, mentions: [m.sender] }, { quoted: m });
     } catch (e) {
         conn.reply(m.chat, 'Maaf, menu sedang error', m)
         console.error(e)
