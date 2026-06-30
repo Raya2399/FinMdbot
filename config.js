@@ -1,4 +1,5 @@
-require("dotenv").config();
+// Timezone
+process.env.TZ = 'Asia/Jakarta';
 
 global.owner = ['6281345407953'] // wajib di isi tidak boleh kosong
 global.mods  = ['6281345407953'] // wajib di isi tidak boleh kosong
@@ -24,12 +25,10 @@ global.gcspam = false // Set true/false untuk menutup grup ketika spam (default:
 
 // APIKEY INI WAJIB DI ISI! //
 global.btc = 'alfinphoenixaltair'
-// Daftar terlebih dahulu https://api.botcahx.eu.org
-    
-// AKSESKEY INI DI ISI JIKA DIPERLUKAN (e.g suno ai (ai music ) & fitur prem lainnya//
-global.aksesKey = 'alfinphoenix'
-// Daftar terlebih dahulu https://api.botcahx.eu.org
 
+
+// AKSESKEY INI DI ISI JIKA DIPERLUKAN JADI TIDAK WAJIB DI ISI! (e.g suno ai (ai music ) & fitur prem lainnya//
+global.aksesKey = 'alfinphoenix'
 
 // Tidak boleh diganti atau di ubah
 global.APIs = {   
