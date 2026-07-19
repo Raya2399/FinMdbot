@@ -19,7 +19,6 @@ global.author = 'Tiktok : @alvin_ch1\nIg : @al_vin.233\nFb : Alfin Phoenix Altai
 global.maxwarn = '3' // Peringatan maksimum Warn
 
 global.autobio = false // Set true/false untuk mengaktifkan atau mematikan autobio (default: false)
-global.antiporn = false // Set true/false untuk Auto delete pesan porno (bot harus admin) (default: false)
 global.spam = false // Set true/false untuk anti spam (default: false)
 global.gcspam = false // Set true/false untuk menutup grup ketika spam (default: false)
     
